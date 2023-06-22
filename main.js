@@ -1,8 +1,9 @@
 let myLibrary = [];
 
 const book = document.createElement('li');
-const bookList = document.getElementById('book-list');
+let bookList = document.getElementById('book-list');
 const btn = document.getElementById('button');
+const rmvButton = document.getElementById('rmv-button');
 
 const title = document.getElementById('title');
 const author = document.getElementById('author');
@@ -64,4 +65,10 @@ function newBook(event) {
     ' Pages: ' +
     newlyAddedBook.pages;
   bookList.appendChild(deneme);
+}
+
+rmvButton.addEventListener('click', removeBook);
+
+function removeBook(event) {
+  bookList.removeChild(bookList.lastChild);
 }
