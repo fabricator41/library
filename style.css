@@ -38,10 +38,14 @@ label {
   margin: 5px 0;
 }
 
-button {
+button.new {
   margin-top: 15px;
   padding: 16px 32px;
   font-size: 1rem;
+}
+
+.close {
+  padding: 8px 16px;
 }
 
 ul {

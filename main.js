@@ -3,11 +3,23 @@ let myLibrary = [];
 const book = document.createElement('li');
 let bookList = document.getElementById('book-list');
 const btn = document.getElementById('button');
-const rmvButton = document.getElementById('rmv-button');
+let removeButton = document.querySelectorAll('#remove');
+let readButton = document.querySelectorAll('.read');
 
 const title = document.getElementById('title');
 const author = document.getElementById('author');
 const pages = document.getElementById('pages');
+
+addEventListenerList(readButton, 'click', isRead);
+addEventListenerList(removeButton, 'click', removeNode);
+
+function isRead() {
+  if (this.textContent === 'Read') {
+    this.textContent = 'Not Read';
+  } else {
+    this.textContent = 'Read';
+  }
+}
 
 // Constructor function
 
@@ -18,17 +30,9 @@ function Book(title, author, pages, isRead) {
   this.read = isRead;
 }
 
-let deneme = new Book('Temel Finans', 'Emre İlhan', 555, true);
-let deneme2 = new Book('Para Durumu', 'Çınar İlhan', 425, true);
-let deneme3 = new Book('Finans Matematiği', 'Anonim', 758, true);
-
 function addBookToLibrary(item) {
   myLibrary.push(item);
 }
-
-addBookToLibrary(deneme);
-addBookToLibrary(deneme2);
-addBookToLibrary(deneme3);
 
 function showBooks(arr) {
   for (item in arr) {
@@ -44,9 +48,24 @@ function showBooks(arr) {
   }
 }
 
+// a function which add events to each node
+
+function addEventListenerList(list, event, fn) {
+  for (let i = 0; i < list.length; i++) {
+    list[i].addEventListener(event, fn, false);
+  }
+}
+
 showBooks(myLibrary);
 
 btn.addEventListener('click', newBook);
+
+// 1. Preventing refresh of the page
+// 2. Create a new Book Object
+// 3. Create a new list element
+// 4. Update inner of list element
+// 5. Add new book to existing list
+// 6. Add events to Read and Remove buttons
 
 function newBook(event) {
   event.preventDefault();
@@ -54,21 +73,23 @@ function newBook(event) {
     title.value,
     author.value,
     pages.value,
-    (isRead = false)
+    (this.read = 'Read')
   );
   let deneme = document.createElement('li');
-  deneme.innerHTML =
-    'Title: ' +
-    newlyAddedBook.title +
-    ' Author: ' +
-    newlyAddedBook.author +
-    ' Pages: ' +
-    newlyAddedBook.pages;
-  bookList.appendChild(deneme);
+  deneme.innerHTML = ` <li>Title: ${newlyAddedBook.title}, Author: ${newlyAddedBook.author}, ${newlyAddedBook.pages}
+    <button class="read close">${newlyAddedBook.read}</button>
+    <button id="remove" type="button" class="close" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button></li>`;
+  bookList.append(deneme);
+  readButton = document.querySelectorAll('.read');
+  addEventListenerList(readButton, 'click', isRead);
+  removeButton = document.querySelectorAll('#remove');
+  addEventListenerList(removeButton, 'click', removeNode);
 }
 
-rmvButton.addEventListener('click', removeBook);
+// a function which removes an element
 
-function removeBook(event) {
-  bookList.removeChild(bookList.lastChild);
+function removeNode() {
+  this.parentElement.remove();
 }
