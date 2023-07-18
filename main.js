@@ -1,7 +1,8 @@
 let myLibrary = [];
 
-const book = document.createElement('li');
-let bookList = document.getElementById('book-list');
+let displayTitle = document.getElementById('t');
+let displayAuthor = document.getElementById('a');
+let displayPages = document.getElementById('p');
 const btn = document.getElementById('button');
 let removeButton = document.querySelectorAll('#remove');
 let readButton = document.querySelectorAll('.read');
@@ -36,15 +37,15 @@ function addBookToLibrary(item) {
 
 function showBooks(arr) {
   for (item in arr) {
-    let deneme = document.createElement('li');
-    deneme.innerHTML =
-      'Title: ' +
-      arr[item].title +
-      ' Author: ' +
-      arr[item].author +
-      ' Pages: ' +
-      arr[item].pages;
-    bookList.appendChild(deneme);
+    let deneme = document.createElement('p');
+    let deneme2 = document.createElement('p');
+    let deneme3 = document.createElement('p');
+    deneme.innerHTML = arr[item].title;
+    deneme2.innerHTML = arr[item].author;
+    deneme3.innerHTML = arr[item].pages;
+    t.appendChild(deneme);
+    a.appendChild(deneme2);
+    p.appendChild(deneme3);
   }
 }
 
@@ -75,13 +76,18 @@ function newBook(event) {
     pages.value,
     (this.read = 'Read')
   );
-  let deneme = document.createElement('li');
-  deneme.innerHTML = ` <li>Title: ${newlyAddedBook.title}, Author: ${newlyAddedBook.author}, ${newlyAddedBook.pages}
-    <button class="read close">${newlyAddedBook.read}</button>
-    <button id="remove" type="button" class="close" aria-label="Close">
-      <span aria-hidden="true">X</span>
-    </button></li>`;
-  bookList.append(deneme);
+  let deneme = document.createElement('p');
+  let deneme2 = document.createElement('p');
+  let deneme3 = document.createElement('p');
+
+  deneme.innerHTML = newlyAddedBook.title;
+  deneme2.innerHTML = newlyAddedBook.author;
+  deneme3.innerHTML = newlyAddedBook.pages;
+
+  t.append(deneme);
+  a.append(deneme2);
+  p.append(deneme3);
+
   readButton = document.querySelectorAll('.read');
   addEventListenerList(readButton, 'click', isRead);
   removeButton = document.querySelectorAll('#remove');
@@ -93,3 +99,11 @@ function newBook(event) {
 function removeNode() {
   this.parentElement.remove();
 }
+
+/* 
+<button class="read close">${newlyAddedBook.read}</button>
+    <button id="remove" type="button" class="close" aria-label="Close">
+      <span aria-hidden="true">X</span>
+    </button></li>`;
+
+    */

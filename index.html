@@ -10,24 +10,26 @@
   <body>
     <h1>My Library App</h1>
     <div class="container">
-      <ul class="book-list" id="book-list">
-        <li>
-          Title: The Wealth Of Nations, Author: Adam Smith, 425
-          <button class="read close">Read</button>
-          <button id="remove" type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">X</span>
-          </button>
-        </li>
-      </ul>
       <form action="">
         <label for="title">Book Title</label>
-        <input type="text" name="title" id="title" />
+        <input type="text" name="title" id="title" autocomplete="on" />
         <label for="author">Author</label>
-        <input type="text" name="author" id="author" />
+        <input type="text" name="author" id="author" autocomplete="on" />
         <label for="pages">Number Of Pages</label>
         <input type="number" name="pages" id="pages" />
         <button id="button" class="new">New Book</button>
       </form>
+    </div>
+    <div class="headings-container">
+      <div id="t">
+        <h2>Title</h2>
+      </div>
+      <div id="a">
+        <h2>Author</h2>
+      </div>
+      <div id="p">
+        <h2>Pages</h2>
+      </div>
     </div>
   </body>
 </html>
